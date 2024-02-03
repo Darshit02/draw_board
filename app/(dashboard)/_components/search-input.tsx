@@ -37,6 +37,7 @@ export const SearchInput = () => {
         className="w-full max-w-[516px] pl-9"
         placeholder="Search Board"
         value={value}
+        onChange={handleChange}
       />
     </div>
   );
