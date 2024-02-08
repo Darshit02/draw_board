@@ -12,6 +12,7 @@ export const useApiMutation = (mutatioFunction: any) => {
       .then((result) => {
         return result;
       })
+      
       .catch((error) => {
         throw error;
       });
