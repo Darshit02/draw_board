@@ -3,7 +3,7 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
 import { EmptyFavorites } from "./empty-favorit";
-import { EmptyNote } from "./empty-note";
+import { EmptyBoards } from "./empty-note";
 import { EmptySearch } from "./empty-search";
 import { BoardCard } from "./boardcard";
 import { NewBoardButton } from "./new-board-button";
@@ -17,9 +17,10 @@ interface BoardListProps {
 }
 
 export const BoardList = ({ orgId, query }: BoardListProps) => {
-  const data = useQuery(api.boards.get, { orgId ,
-  ...query
-  }); // fetch data
+  const data = useQuery(api.boards.get, { 
+    orgId,
+    ...query,
+  });// fetch data
 
   if (data === undefined) {
     return (
@@ -46,7 +47,7 @@ export const BoardList = ({ orgId, query }: BoardListProps) => {
     return <EmptyFavorites />;
   }
   if (!data?.length) {
-    return <EmptyNote />;
+    return <EmptyBoards />;
   }
 
   return (
