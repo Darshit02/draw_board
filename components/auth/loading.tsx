@@ -4,11 +4,11 @@ export const Loading = () => {
     return(
         <div className="h-full w-full flex flex-col justify-center items-center">
             <Image
-                src="/logo1.svg"
+                src="/dream.gif"
                 alt="logo"
-                width={120}
-                height={120}
-                className="animate-spin duration-700" 
+                width={400}
+                height={400}
+                // className="animate-spin duration-700" 
             />
 
 

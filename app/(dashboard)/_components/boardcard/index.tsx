@@ -8,7 +8,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Overlay } from "./overlay";
 import { Footer } from "./footer";
 import { Actions } from "@/components/actions";
+import { useApiMutation } from "@/hooks/use-api-mutation";
+import { api } from "@/convex/_generated/api";
 import { MoreHorizontal } from "lucide-react";
+import { toast } from "sonner";
+import { useMutation } from "convex/react";
+import { Id } from "@/convex/_generated/dataModel";
 
 interface BoardCardProps {
   id: string;
@@ -32,11 +37,33 @@ export const BoardCard = ({
   isFavorite,
 }: BoardCardProps) => {
   const { userId } = useAuth();
-
   const authorLabel = userId === authorId ? "You" : authorName;
   const createdAtLabel = formatDistanceToNow(createdAt, {
     addSuffix: true,
   });
+const handleFavorite = useMutation(api.board.favorite);
+const handleUnfavorite = useMutation(api.board.unfavorite);
+  const {
+    mutate: onFavorite,
+    pending: pendingFavorite,
+  } = useApiMutation(api.board.favorite);
+  const {
+    mutate: onUnfavorite,
+    pending: pendingUnfavorite,
+  } = useApiMutation(api.board.unfavorite);
+
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      handleUnfavorite({ id : id as Id<"boards"> })
+      .then((id) => toast.success("Now It's Unfavorited board"))
+        .catch(() => toast.error("Failed to unfavorite"))
+    } else {
+      handleFavorite({ id :  id as Id<"boards"> , orgId })
+      .then((id) => toast.success("Now Its favorited board"))
+        .catch(() => toast.error("Failed to favorite"))
+    }
+  };
+
   return (
     <Link href={`/board/${id}`}>
       <div className="group aspect-[100/127] border rounded-lg flex flex-col justify-between overflow-hidden">
@@ -54,8 +81,8 @@ export const BoardCard = ({
           title={title}
           authorLabel={authorLabel}
           createdAtLabel={createdAtLabel}
-          onClick={() => {}}
-          disabled={false}
+          onClick={toggleFavorite}
+          disabled={pendingFavorite || pendingUnfavorite}
         />
       </div>
     </Link>
