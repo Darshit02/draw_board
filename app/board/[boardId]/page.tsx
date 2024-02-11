@@ -1,8 +1,21 @@
 import { Canvas } from "./_components/canvas"
+import { Room } from "@/components/room"
+import { Loading } from "./_components/canvas-loading"
+interface BoardPageProps {
+params: {
+  boardId: string
+}
 
-const BoardPage = () => {
+}
+
+const BoardPage = ({params}: BoardPageProps) => {
+  
+  
   return (
-<Canvas/>
+    <Room roomId={params.boardId} fallback={<Loading/>}>
+
+<Canvas boardId = {params.boardId}/>
+    </Room>
   )
 }
 
