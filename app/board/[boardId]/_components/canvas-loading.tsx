@@ -7,7 +7,7 @@ import { Toolbar } from "./toolbar"
 export const Loading = () => {
   return (
     <main className="h-full w-full relative bg-neutral-100 touch-none flex items-center justify-center">
-        <Loader className="animate-spin h-6 w-6 bg-muted-foreground"/>
+        <Loader className="animate-spin h-6 w-6 "/>
         <Info.Skeleton/>
         <Participants.Skeleton/>
         <Toolbar.Skeleton/>
