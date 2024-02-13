@@ -30,7 +30,7 @@ export const Participants = () => {
         
         {currentUser && (
           <UserAvatar
-            borderColor={connectionIdToColor(currentUser.connectionId)}
+            boarderColor={connectionIdToColor(currentUser.connectionId)}
             src={currentUser.info?.picture}
             name={`${currentUser.info?.name} (You)`}
             fallback={currentUser.info?.name?.[0]}
