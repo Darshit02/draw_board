@@ -51,6 +51,7 @@ export const remove = mutation({
     if (!identity) {
       throw new Error("Unauthorized");
     }
+
     const userId = identity.subject;
 
     const existingFavorite = await ctx.db
