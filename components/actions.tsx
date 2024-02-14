@@ -15,6 +15,7 @@ import { useApiMutation } from "@/hooks/use-api-mutation";
 import { Button } from "@/components/ui/button";
 import { ConfirmModal } from "@/components/confirm-model";
 import { useRenameModel } from "@/store/use-rename-model";
+import { useRouter } from "next/navigation";
 
 interface ActionsProps {
   children: React.ReactNode;
@@ -31,6 +32,7 @@ export const Actions = ({
   id,
   title,
 }: ActionsProps) => {
+  const router  = useRouter()
   const { onOpen } = useRenameModel();
   const { mutate, pending } = useApiMutation(api.board.remove);
 
@@ -45,6 +47,7 @@ export const Actions = ({
     mutate({ id })
       .then(() => toast.success("Board deleted"))
       .catch(() => toast.error("Failed to delete board"));
+    // router.push("/");
   };
 
   return (

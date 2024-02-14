@@ -1,63 +1,100 @@
-import { Circle, MousePointer2, Pencil, Redo2, Square, StickyNote, Type, Undo2 } from "lucide-react";
+import {
+  Circle,
+  MousePointer2,
+  Pencil,
+  Redo2,
+  Square,
+  StickyNote,
+  Type,
+  Undo2,
+} from "lucide-react";
 import { ToolButton } from "./tool-button";
 
-export const Toolbar = () => {
+import { CanvasMode, CanvasState, LayerType } from "@/types/canvas";
+
+interface ToolbarProps {
+  canvasState: CanvasState;
+  setCanvasState: (state: CanvasState) => void;
+  undo: () => void;
+  redo: () => void;
+  canUndo: boolean;
+  canRedo: boolean;
+}
+
+export const Toolbar = ({
+  canvasState,
+  setCanvasState,
+  undo,
+  redo,
+  canUndo,
+  canRedo,
+}: ToolbarProps) => {
   return (
     <div className="absolute top-[50%] -translate-y-[50%] left-2 flex flex-col gap-y-4">
       <div className="bg-white rounded-md p-1.5 flex gap-y-1 flex-col items-center shadow-md">
         <ToolButton
           label="Select"
           icon={MousePointer2}
-          onClick={() => {}}
-          isActive= {false}
+          onClick={() =>
+            setCanvasState({
+              mode: CanvasMode.None,
+            })
+          }
+          isActive={
+            canvasState.mode === CanvasMode.None ||
+            canvasState.mode === CanvasMode.Translating ||
+            canvasState.mode === CanvasMode.SelectionNet ||
+            canvasState.mode === CanvasMode.Resizing ||
+            canvasState.mode === CanvasMode.Pressing
+          }
         />
-          <ToolButton
+        <ToolButton
           label="Text"
           icon={Type}
-          onClick={() => {}}
-          isActive= {false}
+          onClick={() => setCanvasState({ mode: CanvasMode.Inserting , LayerType : LayerType.Text})}
+          isActive={canvasState.mode === CanvasMode.Inserting && canvasState.LayerType === LayerType.Text}
         />
-          <ToolButton
+        <ToolButton
           label="Sticky Note"
           icon={StickyNote}
-          onClick={() => {}}
-          isActive= {false}
+          onClick={() => setCanvasState({ mode: CanvasMode.Inserting , LayerType : LayerType.Note})}
+          isActive={canvasState.mode === CanvasMode.Inserting && canvasState.LayerType === LayerType.Note}
         />
-          <ToolButton
+        <ToolButton
           label="Rectangle"
           icon={Square}
-          onClick={() => {}}
-          isActive= {false}
+          onClick={() => setCanvasState({ mode: CanvasMode.Inserting , LayerType : LayerType.Rectangle})}
+          isActive={canvasState.mode === CanvasMode.Inserting && canvasState.LayerType === LayerType.Rectangle}
         />
-          <ToolButton
+        <ToolButton
           label="Ellipse"
           icon={Circle}
-          onClick={() => {}}
-          isActive= {false}
+          onClick={() => setCanvasState({ mode: CanvasMode.Inserting , LayerType : LayerType.Ellipse})}
+          isActive={canvasState.mode === CanvasMode.Inserting && canvasState.LayerType === LayerType.Ellipse}
         />
-          <ToolButton
+        <ToolButton
           label="Pen"
           icon={Pencil}
-          onClick={() => {}}
-          isActive= {false}
+          onClick={() => setCanvasState({
+            mode : CanvasMode.Pencil
+          })}
+          isActive={
+            canvasState.mode === CanvasMode.Pencil
+          }
         />
-          
       </div>
       <div className="bg-white rounded-md p-1.5 flex flex-col items-center shadow-md">
-      <ToolButton
+        <ToolButton
           label="Undo"
           icon={Undo2}
-          onClick={() => {}}
-          isActive= {false}
-          isDisabled= {true}
-
+          onClick={undo}
+          isDisabled={!canUndo}
         />
-          <ToolButton
+        <ToolButton
           label="Redo"
           icon={Redo2}
-          onClick={() => {}}
-          isActive= {false}
-          isDisabled= {true}
+          onClick={redo}
+          isDisabled={!canRedo}
         />
       </div>
     </div>
@@ -66,6 +103,6 @@ export const Toolbar = () => {
 
 export const ToolbarSkeleton = () => {
   return (
-    <div className="absolute top-[50%] -translate-y-[50%] left-2 flex flex-col gap-y-4 bg-white h-[360px] w-[52px] shadow-md rounded-md"/>
+    <div className="absolute top-[50%] -translate-y-[50%] left-2 flex flex-col gap-y-4 bg-white h-[360px] w-[52px] shadow-md rounded-md" />
   );
 };
