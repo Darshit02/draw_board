@@ -51,26 +51,26 @@ export const Toolbar = ({
         <ToolButton
           label="Text"
           icon={Type}
-          onClick={() => setCanvasState({ mode: CanvasMode.Inserting , LayerType : LayerType.Text})}
-          isActive={canvasState.mode === CanvasMode.Inserting && canvasState.LayerType === LayerType.Text}
+          onClick={() => setCanvasState({ mode: CanvasMode.Inserting , layerType : LayerType.Text})}
+          isActive={canvasState.mode === CanvasMode.Inserting && canvasState.layerType === LayerType.Text}
         />
         <ToolButton
           label="Sticky Note"
           icon={StickyNote}
-          onClick={() => setCanvasState({ mode: CanvasMode.Inserting , LayerType : LayerType.Note})}
-          isActive={canvasState.mode === CanvasMode.Inserting && canvasState.LayerType === LayerType.Note}
+          onClick={() => setCanvasState({ mode: CanvasMode.Inserting , layerType : LayerType.Note})}
+          isActive={canvasState.mode === CanvasMode.Inserting && canvasState.layerType === LayerType.Note}
         />
         <ToolButton
           label="Rectangle"
           icon={Square}
-          onClick={() => setCanvasState({ mode: CanvasMode.Inserting , LayerType : LayerType.Rectangle})}
-          isActive={canvasState.mode === CanvasMode.Inserting && canvasState.LayerType === LayerType.Rectangle}
+          onClick={() => setCanvasState({ mode: CanvasMode.Inserting , layerType : LayerType.Rectangle})}
+          isActive={canvasState.mode === CanvasMode.Inserting && canvasState.layerType === LayerType.Rectangle}
         />
         <ToolButton
           label="Ellipse"
           icon={Circle}
-          onClick={() => setCanvasState({ mode: CanvasMode.Inserting , LayerType : LayerType.Ellipse})}
-          isActive={canvasState.mode === CanvasMode.Inserting && canvasState.LayerType === LayerType.Ellipse}
+          onClick={() => setCanvasState({ mode: CanvasMode.Inserting , layerType : LayerType.Ellipse})}
+          isActive={canvasState.mode === CanvasMode.Inserting && canvasState.layerType === LayerType.Ellipse}
         />
         <ToolButton
           label="Pen"
