@@ -77,33 +77,43 @@ export function resizeBounds(
 
 export function findIntersectingLayerWithRectangle(
   layerIds: readonly string[],
-  layers : ReadonlyMap<string, Layer>,
-  a:Point,
-  b:Point
-){
+  layers: ReadonlyMap<string, Layer>,
+  a: Point,
+  b: Point,
+) {
   const rect = {
-    x : Math.min(a.x, b.x),
-    y : Math.min(a.y, b.y),
-    width : Math.abs(a.x - b.x),
-    height : Math.abs(a.y - b.y)
-  }
-  const ids = [] 
-  for(const layerId of layerIds){
-    const layer = layers.get(layerId)
+    x: Math.min(a.x, b.x),
+    y: Math.min(a.y, b.y),
+    width: Math.abs(a.x - b.x),
+    height: Math.abs(a.y - b.y),
+  };
+
+  const ids = [];
+
+  for (const layerId of layerIds) {
+    const layer = layers.get(layerId);
 
     if (layer == null) {
-      continue
+      continue;
     }
-    const { x, y,height,width } = layer
+
+    const { x, y, height, width } = layer;
+
     if (
-      rect.x + rect.width > x && 
-      rect.x < x + width &&
+      rect.x + rect.width > x &&
+      rect.x < x + width && 
       rect.y + rect.height > y &&
       rect.y < y + height
-
     ) {
-      ids.push(layerId)
+      ids.push(layerId);
     }
   }
-  return ids
-}
+
+  return ids;
+};
+
+export function getContrastingTextColor(color: Color) {
+  const luminance = 0.299 * color.r + 0.587 * color.g + 0.114 * color.b;
+
+  return luminance > 182 ? "black" : "white";
+};
