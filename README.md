@@ -1,4 +1,4 @@
-# White Board using Nextjs, React, Tailwind (2024)
+# White Board using Nextjs, React, Tailwind
 
 Features:
 
