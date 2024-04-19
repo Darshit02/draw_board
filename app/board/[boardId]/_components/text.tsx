@@ -48,6 +48,7 @@ export const Text = ({
   }, []);
 
   const handleContentChange = (e: ContentEditableEvent) => {
+    e.preventDefault()
     updateValue(e.target.value);
   };
 
